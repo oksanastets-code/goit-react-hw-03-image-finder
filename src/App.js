@@ -1,4 +1,5 @@
 import { Component } from 'react';
+// import { Searchbar } from './components/Searchbar/Searchbar';
 
 export default class App extends Component {
   state = {
@@ -18,7 +19,23 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <header className="searchbar">
+          <form className="form">
+            <button type="submit" className="button">
+              <span className="button-label">Search</span>
+            </button>
+
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              autoFocus
+              placeholder="Search images and photos"
+            />
+          </form>
+        </header>
         {this.state.loading && <h1>Loading...</h1>}
+        {/* <Searchbar/> */}
         {/* {this.state.images && <div>{ this.state.images}</div>} */}
       </div>
     );
