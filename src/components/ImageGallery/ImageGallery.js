@@ -1,5 +1,5 @@
 import { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import { GalleryList } from './ImageGallery.styled';
 
@@ -41,7 +41,7 @@ export default class ImageGallery extends Component {
           <GalleryList>
             {images.map(image => (
               <ImageGalleryItem
-                id={image.id}
+                key={image.id}
                 webformatURL={image.webformatURL}
                 pageURL={image.pageURL}
               />
@@ -52,6 +52,10 @@ export default class ImageGallery extends Component {
     );
   }
 }
-// GalleryList.propTypes = {
-
-// }
+GalleryList.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }),
+  ),
+};

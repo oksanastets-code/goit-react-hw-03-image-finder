@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import toast from 'react-hot-toast';
+import { ImSearch } from 'react-icons/im';
 import PropTypes from 'prop-types';
 import {
   SearchBar,
@@ -34,6 +35,7 @@ export default class Searchbar extends Component {
       <SearchBar>
         <SearchForm onSubmit={this.handleSubmit}>
           <SearchFormButton type="submit">
+            <ImSearch />
             <SearchFormButtonLabel>Search</SearchFormButtonLabel>
           </SearchFormButton>
 

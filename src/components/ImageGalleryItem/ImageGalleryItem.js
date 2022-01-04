@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 import { GalleryItem, GalleryItemImage } from './ImageGalleryItem.styled';
 
-export default function ImageGalleryItem({ id, webformatURL, pageURL }) {
+export default function ImageGalleryItem({ webformatURL, pageURL }) {
   return (
-    <GalleryItem key={id} className="gallery-item">
+    <GalleryItem>
       <GalleryItemImage src={webformatURL} alt={pageURL} />
     </GalleryItem>
   );
 }
 ImageGalleryItem.propTypes = {
-  id: PropTypes.number.isRequired,
   webformatURL: PropTypes.string.isRequired,
   pageURL: PropTypes.string.isRequired,
 };
