@@ -1,5 +1,14 @@
 import { Component } from 'react';
 import toast from 'react-hot-toast';
+import PropTypes from 'prop-types';
+import {
+  SearchBar,
+  SearchForm,
+  SearchFormButton,
+  SearchFormButtonLabel,
+  SearchFormInput,
+} from './Searchbar.styled';
+
 export default class Searchbar extends Component {
   state = {
     keyWord: '',
@@ -22,22 +31,25 @@ export default class Searchbar extends Component {
 
   render() {
     return (
-      <header className="searchbar">
-        <form onSubmit={this.handleSubmit} className="form">
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
-          </button>
+      <SearchBar>
+        <SearchForm onSubmit={this.handleSubmit}>
+          <SearchFormButton type="submit">
+            <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+          </SearchFormButton>
 
-          <input
-            className="input"
+          <SearchFormInput
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
             onChange={this.handleKeyWordChange}
           />
-        </form>
-      </header>
+        </SearchForm>
+      </SearchBar>
     );
   }
 }
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
+};

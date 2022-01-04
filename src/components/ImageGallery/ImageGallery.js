@@ -1,4 +1,8 @@
 import { Component } from 'react';
+// import PropTypes from 'prop-types';
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
+import { GalleryList } from './ImageGallery.styled';
+
 export default class ImageGallery extends Component {
   state = {
     images: null,
@@ -20,6 +24,7 @@ export default class ImageGallery extends Component {
           return Promise.reject(new Error('No images found'));
         })
         .then(data => {
+          console.log(data.hits);
           return data.hits;
         })
         .then(images => this.setState({ images }))
@@ -33,15 +38,20 @@ export default class ImageGallery extends Component {
       <>
         {loading && <h1>Loading...</h1>}
         {images && (
-          <ul className="gallery">
+          <GalleryList>
             {images.map(image => (
-              <li key={image.id} className="gallery-item">
-                <img src={image.webformatURL} alt={image.pageURL} width={240} />
-              </li>
+              <ImageGalleryItem
+                id={image.id}
+                webformatURL={image.webformatURL}
+                pageURL={image.pageURL}
+              />
             ))}
-          </ul>
+          </GalleryList>
         )}
       </>
     );
   }
 }
+// GalleryList.propTypes = {
+
+// }
