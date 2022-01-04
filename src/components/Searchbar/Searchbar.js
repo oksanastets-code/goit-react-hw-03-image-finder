@@ -24,6 +24,7 @@ export default class Searchbar extends Component {
     }
     this.props.onSubmit(this.state.keyWord);
     this.setState({ keyWord: '' });
+    e.currentTarget.reset();
   };
   handleKeyWordChange = e => {
     this.setState({ keyWord: e.currentTarget.value.toLowerCase() });

@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { Div } from './App.styled';
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
+import Button from './components/Button/Button';
 
 export default class App extends Component {
   state = {
@@ -20,6 +21,7 @@ export default class App extends Component {
         <Searchbar onSubmit={this.handleFormSubmit} />
         {/* {this.state.loading && <h1>Loading...</h1>} */}
         <ImageGallery searchKey={this.state.searchWord} />
+        <Button />
       </Div>
     );
   }

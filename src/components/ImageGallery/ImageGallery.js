@@ -13,7 +13,7 @@ export default class ImageGallery extends Component {
     if (prevProps.searchKey !== this.props.searchKey) {
       //   console.log('prevProps.searchKey', prevProps.searchKey);
       //   console.log('this.props.searchKey', this.props.searchKey);
-      this.setState({ loading: true });
+      this.setState({ loading: true, images: null });
       fetch(
         `https://pixabay.com/api/?q=${this.props.searchKey}&page=1&key=24206659-085fc8a8bf5db593be5a49f71&image_type=photo&orientation=horizontal&per_page=12`,
       )
