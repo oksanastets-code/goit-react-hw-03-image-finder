@@ -1,9 +1,10 @@
 import { Component } from 'react';
-// import { Searchbar } from './components/Searchbar/Searchbar';
+import toast, { Toaster } from 'react-hot-toast';
+import Searchbar from './components/Searchbar/Searchbar';
 
 export default class App extends Component {
   state = {
-    images: null,
+    searchWord: '',
     loading: true,
   };
   componentDidMount() {
@@ -16,26 +17,17 @@ export default class App extends Component {
         .finally(() => this.setState({ loading: false }));
     }, 5000);
   }
+  handleFormSubmit = keyWord => {
+    console.log(keyWord);
+    this.setState({ searchWord: keyWord });
+    console.log('searchWord', this.state.searchWord);
+  };
   render() {
     return (
       <div>
-        <header className="searchbar">
-          <form className="form">
-            <button type="submit" className="button">
-              <span className="button-label">Search</span>
-            </button>
-
-            <input
-              className="input"
-              type="text"
-              autoComplete="off"
-              autoFocus
-              placeholder="Search images and photos"
-            />
-          </form>
-        </header>
+        <Toaster />
+        <Searchbar onSubmit={this.handleFormSubmit} />
         {this.state.loading && <h1>Loading...</h1>}
-        {/* <Searchbar/> */}
         {/* {this.state.images && <div>{ this.state.images}</div>} */}
       </div>
     );
