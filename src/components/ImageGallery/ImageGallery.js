@@ -8,6 +8,7 @@ export default class ImageGallery extends Component {
     images: null,
     loading: false,
     error: null,
+    showModal: false,
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.searchKey !== this.props.searchKey) {
