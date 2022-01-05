@@ -9,6 +9,7 @@ export default class ImageGallery extends Component {
     loading: false,
     error: null,
     showModal: false,
+    selectedImage: null,
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.searchKey !== this.props.searchKey) {
@@ -33,6 +34,10 @@ export default class ImageGallery extends Component {
         .finally(() => this.setState({ loading: false }));
     }
   }
+  selectImage = (url, name) => {
+    this.setState({ selectedImage: url });
+    console.log('вибрали картинку', name);
+  };
   render() {
     const { images, loading } = this.state;
     return (
@@ -45,6 +50,8 @@ export default class ImageGallery extends Component {
                 key={image.id}
                 webformatURL={image.webformatURL}
                 pageURL={image.pageURL}
+                largeImageURL={image.largeImageURL}
+                onSelect={this.selectImage}
               />
             ))}
           </GalleryList>
