@@ -2,14 +2,13 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import { GalleryList } from './ImageGallery.styled';
-import Modal from '../Modal/Modal';
+// import Modal from '../Modal/Modal';
 
 export default class ImageGallery extends Component {
   state = {
     images: null,
     loading: false,
     error: null,
-    showModal: false,
     selectedImage: null,
   };
   componentDidUpdate(prevProps, prevState) {
@@ -35,18 +34,16 @@ export default class ImageGallery extends Component {
         .finally(() => this.setState({ loading: false }));
     }
   }
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
-  };
   selectImage = (url, name) => {
     this.setState({ selectedImage: url });
+
     console.log('вибрали картинку', name);
-    this.toggleModal();
+    console.log(this.state.selectedImage);
+    console.log(url);
+    this.props.onOpen(this.state.selectedImage);
   };
   render() {
-    const { images, loading, showModal } = this.state;
+    const { images, loading } = this.state;
     return (
       <>
         {loading && <h1>Loading...</h1>}
@@ -56,18 +53,18 @@ export default class ImageGallery extends Component {
               <ImageGalleryItem
                 key={image.id}
                 webformatURL={image.webformatURL}
-                pageURL={image.pageURL}
+                tags={image.tags}
                 largeImageURL={image.largeImageURL}
                 onSelect={this.selectImage}
               />
             ))}
           </GalleryList>
         )}
-        {showModal && (
+        {/* {showModal && (
           <Modal onClose={this.toggleModal}>
             <ImageGalleryItem />
           </Modal>
-        )}
+        )} */}
       </>
     );
   }

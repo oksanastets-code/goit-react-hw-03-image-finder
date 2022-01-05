@@ -5,26 +5,28 @@ import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 // import ImageGalleryItem from './components/ImageGalleryItem/ImageGalleryItem';
 import Button from './components/Button/Button';
-// import Modal from './components/Modal/Modal';
+import Modal from './components/Modal/Modal';
 
 export default class App extends Component {
   state = {
     searchWord: '',
-    // showModal: false,
+    showModal: false,
+    selectedImage: null,
   };
   handleFormSubmit = keyWord => {
     console.log(keyWord);
     this.setState({ searchWord: keyWord });
     console.log('searchWord', this.state.searchWord);
   };
-  // toggleModal = () => {
-  //   this.setState(({ showModal }) => ({
-  //     showModal: !showModal,
-  //   }));
-  // };
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+  onOpenLargeImage = ({ selectedImage }) => {};
 
   render() {
-    // const { showModal } = this.state;
+    const { showModal } = this.state;
     return (
       <Div>
         <Toaster />
@@ -32,15 +34,14 @@ export default class App extends Component {
         {/* {this.state.loading && <h1>Loading...</h1>} */}
         <ImageGallery
           searchKey={this.state.searchWord}
-          selectedImage={this.state.selectedImage}
-          onSelect={this.selectImage}
+          // selectedImage={this.state.selectedImage}
+          // onSelect={this.selectImage}
+          onOpen={this.toggleModal}
         />
         <Button />
-        {/* {showModal && (
-          <Modal onClose={this.toggleModal}>
-            <ImageGalleryItem onOpen={this.toggleModal} />
-          </Modal>
-        )} */}
+        {showModal && (
+          <Modal onClose={this.toggleModal}>{/* <img src={ } alt={ pageURL} /> */}</Modal>
+        )}
       </Div>
     );
   }

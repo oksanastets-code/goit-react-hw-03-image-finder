@@ -3,25 +3,25 @@ import { GalleryItem, GalleryItemImage } from './ImageGalleryItem.styled';
 
 export default function ImageGalleryItem({
   webformatURL,
-  pageURL,
+  tags,
   onSelect,
   largeImageURL,
-  selectedImage,
+  // selectedImage,
 }) {
   return (
     <GalleryItem>
       <GalleryItemImage
         src={webformatURL}
-        alt={pageURL}
-        onClick={() => onSelect(largeImageURL, pageURL)}
+        alt={tags}
+        onClick={() => onSelect(largeImageURL, tags)}
         // selected={selectedImage === largeImageURL}
       />
     </GalleryItem>
   );
 }
 ImageGalleryItem.propTypes = {
-  webformatURL: PropTypes.string.isRequired,
-  pageURL: PropTypes.string.isRequired,
+  webformatURL: PropTypes.string,
+  tags: PropTypes.string,
   largeImageURL: PropTypes.string,
   onClick: PropTypes.func,
 };
