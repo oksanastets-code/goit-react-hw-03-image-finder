@@ -3,28 +3,28 @@ import { Toaster } from 'react-hot-toast';
 import { Div } from './App.styled';
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
-import ImageGalleryItem from './components/ImageGalleryItem/ImageGalleryItem';
+// import ImageGalleryItem from './components/ImageGalleryItem/ImageGalleryItem';
 import Button from './components/Button/Button';
-import Modal from './components/Modal/Modal';
+// import Modal from './components/Modal/Modal';
 
 export default class App extends Component {
   state = {
     searchWord: '',
-    showModal: false,
+    // showModal: false,
   };
   handleFormSubmit = keyWord => {
     console.log(keyWord);
     this.setState({ searchWord: keyWord });
     console.log('searchWord', this.state.searchWord);
   };
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
-  };
+  // toggleModal = () => {
+  //   this.setState(({ showModal }) => ({
+  //     showModal: !showModal,
+  //   }));
+  // };
 
   render() {
-    const { showModal } = this.state;
+    // const { showModal } = this.state;
     return (
       <Div>
         <Toaster />
@@ -36,11 +36,11 @@ export default class App extends Component {
           onSelect={this.selectImage}
         />
         <Button />
-        {showModal && (
+        {/* {showModal && (
           <Modal onClose={this.toggleModal}>
             <ImageGalleryItem onOpen={this.toggleModal} />
           </Modal>
-        )}
+        )} */}
       </Div>
     );
   }

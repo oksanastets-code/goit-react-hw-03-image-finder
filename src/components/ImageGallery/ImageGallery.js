@@ -2,6 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import { GalleryList } from './ImageGallery.styled';
+import Modal from '../Modal/Modal';
 
 export default class ImageGallery extends Component {
   state = {
@@ -34,12 +35,18 @@ export default class ImageGallery extends Component {
         .finally(() => this.setState({ loading: false }));
     }
   }
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
   selectImage = (url, name) => {
     this.setState({ selectedImage: url });
     console.log('вибрали картинку', name);
+    this.toggleModal();
   };
   render() {
-    const { images, loading } = this.state;
+    const { images, loading, showModal } = this.state;
     return (
       <>
         {loading && <h1>Loading...</h1>}
@@ -55,6 +62,11 @@ export default class ImageGallery extends Component {
               />
             ))}
           </GalleryList>
+        )}
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <ImageGalleryItem />
+          </Modal>
         )}
       </>
     );
