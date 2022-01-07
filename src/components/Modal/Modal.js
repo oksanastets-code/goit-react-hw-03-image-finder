@@ -25,10 +25,7 @@ export default class Modal extends Component {
   render() {
     return createPortal(
       <Overlay onClick={this.handleOverlayClick}>
-        <ModalContent>
-          {/* <img src="" alt="" /> */}
-          {this.props.children}
-        </ModalContent>
+        <ModalContent>{this.props.children}</ModalContent>
       </Overlay>,
       modalRoot,
     );

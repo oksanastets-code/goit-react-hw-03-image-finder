@@ -11,8 +11,24 @@ export default class App extends Component {
   state = {
     searchWord: '',
     showModal: false,
-    selectedImage: null,
+    modalImage: null,
+    modalAlt: null,
   };
+  componentDidUpdate(prevProps, prevState) {
+    const { searchWord, modalImage, modalAlt } = this.state;
+    if (prevState.searchWord !== searchWord) {
+      this.setState({ searchWord: searchWord });
+    }
+    // if (prevState.modalImage !== modalImage) {
+    //   this.setState({ modalImage: modalImage })
+    // }
+  }
+  // componentDidMount(selectedImage, selectedAlt) {
+  //   this.setState({ modalImage: selectedImage, modalAlt: selectedAlt });
+  //     console.log('modalImage', selectedImage)
+  //     this.toggleModal();
+  // }
+
   handleFormSubmit = keyWord => {
     console.log(keyWord);
     this.setState({ searchWord: keyWord });
@@ -23,10 +39,15 @@ export default class App extends Component {
       showModal: !showModal,
     }));
   };
-  onOpenLargeImage = ({ selectedImage }) => {};
+
+  onOpenLargeImage = (selectedImage, selectedAlt) => {
+    this.setState({ modalImage: selectedImage, modalAlt: selectedAlt });
+    console.log('modalImage', selectedImage);
+    this.toggleModal();
+  };
 
   render() {
-    const { showModal } = this.state;
+    const { showModal, modalImage, modalAlt } = this.state;
     return (
       <Div>
         <Toaster />
@@ -36,11 +57,13 @@ export default class App extends Component {
           searchKey={this.state.searchWord}
           // selectedImage={this.state.selectedImage}
           // onSelect={this.selectImage}
-          onOpen={this.toggleModal}
+          onOpen={this.onOpenLargeImage}
         />
         <Button />
         {showModal && (
-          <Modal onClose={this.toggleModal}>{/* <img src={ } alt={ pageURL} /> */}</Modal>
+          <Modal onClose={this.toggleModal}>
+            <img src={modalImage} alt={modalAlt} />
+          </Modal>
         )}
       </Div>
     );
