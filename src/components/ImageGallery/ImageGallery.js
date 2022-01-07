@@ -9,8 +9,6 @@ export default class ImageGallery extends Component {
     images: null,
     loading: false,
     error: null,
-    selectedImage: null,
-    selectedAlt: null,
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.searchKey !== this.props.searchKey) {
@@ -35,14 +33,14 @@ export default class ImageGallery extends Component {
         .finally(() => this.setState({ loading: false }));
     }
   }
-  selectImage = (url, name) => {
-    this.setState({ selectedImage: url, selectedAlt: name });
+  // selectImage = (url, name) => {
+  //   this.setState({ selectedImage: url, selectedAlt: name });
 
-    // console.log('вибрали картинку', name);
-    // console.log(this.state.selectedImage);
-    // console.log(url);
-    this.props.onOpen(this.state.selectedImage, this.state.selectedAlt);
-  };
+  //   // console.log('вибрали картинку', name);
+  //   // console.log(this.state.selectedImage);
+  //   // console.log(url);
+  //   this.props.onOpen(this.state.selectedImage, this.state.selectedAlt);
+  // };
   render() {
     const { images, loading } = this.state;
     return (
@@ -56,7 +54,7 @@ export default class ImageGallery extends Component {
                 webformatURL={image.webformatURL}
                 tags={image.tags}
                 largeImageURL={image.largeImageURL}
-                onSelect={this.selectImage}
+                onSelect={this.props.onOpen}
               />
             ))}
           </GalleryList>
