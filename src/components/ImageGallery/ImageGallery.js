@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
+import LoadingDots from '../Loader/Loader';
 import { GalleryList } from './ImageGallery.styled';
-// import Modal from '../Modal/Modal';
+import { fetchImages } from '../../services/apiPixabay';
 
 export default class ImageGallery extends Component {
   state = {
@@ -15,15 +16,8 @@ export default class ImageGallery extends Component {
       //   console.log('prevProps.searchKey', prevProps.searchKey);
       //   console.log('this.props.searchKey', this.props.searchKey);
       this.setState({ loading: true, images: null });
-      fetch(
-        `https://pixabay.com/api/?q=${this.props.searchKey}&page=1&key=24206659-085fc8a8bf5db593be5a49f71&image_type=photo&orientation=horizontal&per_page=12`,
-      )
-        .then(r => {
-          if (r.ok) {
-            return r.json();
-          }
-          return Promise.reject(new Error('No images found'));
-        })
+
+      fetchImages(this.props.searchKey, this.props.page)
         .then(data => {
           console.log(data.hits);
           return data.hits;
@@ -32,6 +26,9 @@ export default class ImageGallery extends Component {
         .catch(error => this.setState({ error }))
         .finally(() => this.setState({ loading: false }));
     }
+    // if (this.state.images !== 0) {
+    //   this.props.onRenderGallery();
+    // }
   }
   // selectImage = (url, name) => {
   //   this.setState({ selectedImage: url, selectedAlt: name });
@@ -45,7 +42,7 @@ export default class ImageGallery extends Component {
     const { images, loading } = this.state;
     return (
       <>
-        {loading && <h1>Loading...</h1>}
+        {loading && <LoadingDots />}
         {images && (
           <GalleryList>
             {images.map(image => (

@@ -10,17 +10,16 @@ import Modal from './components/Modal/Modal';
 export default class App extends Component {
   state = {
     searchWord: '',
+    page: 1,
     showModal: false,
     modalImage: null,
     modalAlt: null,
+    showLoadMoreBtn: false,
   };
   componentDidUpdate(prevProps, prevState) {
-    const { searchWord, modalImage, modalAlt } = this.state;
-    if (prevState.searchWord !== searchWord) {
-      this.setState({ searchWord: searchWord });
-    }
-    // if (prevState.modalImage !== modalImage) {
-    //   this.setState({ modalImage: modalImage })
+    // const { searchWord, modalImage, modalAlt } = this.state;
+    // if (prevState.searchWord !== searchWord) {
+    //   this.setState({ searchWord: searchWord });
     // }
   }
   // componentDidMount(selectedImage, selectedAlt) {
@@ -39,6 +38,11 @@ export default class App extends Component {
       showModal: !showModal,
     }));
   };
+  // toggleLoadMore = () => {
+  //   this.setState(({ showLoadMoreBtn }) => ({
+  //     showLoadMoreBtn: !showLoadMoreBtn,
+  //   }))
+  // }
 
   onOpenLargeImage = (selectedImage, selectedAlt) => {
     this.setState({ modalImage: selectedImage, modalAlt: selectedAlt });
@@ -47,19 +51,20 @@ export default class App extends Component {
   };
 
   render() {
-    const { showModal, modalImage, modalAlt } = this.state;
+    const { showModal, modalImage, modalAlt, showLoadMoreBtn } = this.state;
     return (
       <Div>
         <Toaster />
         <Searchbar onSubmit={this.handleFormSubmit} />
-        {/* {this.state.loading && <h1>Loading...</h1>} */}
         <ImageGallery
           searchKey={this.state.searchWord}
           // selectedImage={this.state.selectedImage}
           // onSelect={this.selectImage}
+          // onRenderGallery={ this.toggleLoadMore}
           onOpen={this.onOpenLargeImage}
         />
-        <Button />
+        {showLoadMoreBtn && <Button />}
+
         {showModal && (
           <Modal onClose={this.toggleModal}>
             <img src={modalImage} alt={modalAlt} />
