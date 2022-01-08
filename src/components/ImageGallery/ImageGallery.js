@@ -13,8 +13,6 @@ export default class ImageGallery extends Component {
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.searchKey !== this.props.searchKey) {
-      //   console.log('prevProps.searchKey', prevProps.searchKey);
-      //   console.log('this.props.searchKey', this.props.searchKey);
       this.setState({ loading: true, images: null });
 
       fetchImages(this.props.searchKey, this.props.page)
@@ -26,18 +24,8 @@ export default class ImageGallery extends Component {
         .catch(error => this.setState({ error }))
         .finally(() => this.setState({ loading: false }));
     }
-    // if (this.state.images !== 0) {
-    //   this.props.onRenderGallery();
-    // }
   }
-  // selectImage = (url, name) => {
-  //   this.setState({ selectedImage: url, selectedAlt: name });
 
-  //   // console.log('вибрали картинку', name);
-  //   // console.log(this.state.selectedImage);
-  //   // console.log(url);
-  //   this.props.onOpen(this.state.selectedImage, this.state.selectedAlt);
-  // };
   render() {
     const { images, loading } = this.state;
     return (

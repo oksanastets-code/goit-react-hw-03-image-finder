@@ -16,12 +16,11 @@ export default class App extends Component {
     modalAlt: null,
     showLoadMoreBtn: false,
   };
-  componentDidUpdate(prevProps, prevState) {
-    // const { searchWord, modalImage, modalAlt } = this.state;
-    // if (prevState.searchWord !== searchWord) {
-    //   this.setState({ searchWord: searchWord });
-    // }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.page !== this.state.page) {
+
+  //   }
+  // }
   // componentDidMount(selectedImage, selectedAlt) {
   //   this.setState({ modalImage: selectedImage, modalAlt: selectedAlt });
   //     console.log('modalImage', selectedImage)
@@ -38,12 +37,12 @@ export default class App extends Component {
       showModal: !showModal,
     }));
   };
-  // toggleLoadMore = () => {
-  //   this.setState(({ showLoadMoreBtn }) => ({
-  //     showLoadMoreBtn: !showLoadMoreBtn,
-  //   }))
-  // }
 
+  onLoadMoreClick = () => {
+    this.setState(({ page }) => ({
+      page: page + 1,
+    }));
+  };
   onOpenLargeImage = (selectedImage, selectedAlt) => {
     this.setState({ modalImage: selectedImage, modalAlt: selectedAlt });
     console.log('modalImage', selectedImage);
@@ -60,11 +59,11 @@ export default class App extends Component {
           searchKey={this.state.searchWord}
           // selectedImage={this.state.selectedImage}
           // onSelect={this.selectImage}
-          // onRenderGallery={ this.toggleLoadMore}
+
           onOpen={this.onOpenLargeImage}
         />
-        {showLoadMoreBtn && <Button />}
-
+        {/* {showLoadMoreBtn && <Button />} */}
+        <Button onClick={this.onLoadMoreClick} />
         {showModal && (
           <Modal onClose={this.toggleModal}>
             <img src={modalImage} alt={modalAlt} />

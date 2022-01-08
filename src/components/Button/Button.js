@@ -4,16 +4,10 @@
 // import { render } from "@testing-library/react";
 
 import { ButtonLoadMore } from './Button.styled';
-export default function Button() {
+export default function Button({ onClick }) {
   return (
-    <ButtonLoadMore type="button" className="btn btn-primary button" data-action="load-more">
-      <span
-        className="spinner-border spinner-border-sm spinner is-hidden"
-        role="status"
-        aria-hidden="true"
-      ></span>
-
-      <span className="label">Load more</span>
+    <ButtonLoadMore type="button" onClick={onClick}>
+      Load more
     </ButtonLoadMore>
   );
 }
