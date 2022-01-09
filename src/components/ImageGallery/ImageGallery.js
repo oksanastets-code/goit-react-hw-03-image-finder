@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import toast from 'react-hot-toast';
+
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import LoadingDots from '../Loader/Loader';
 import Button from '../Button/Button';
@@ -8,21 +10,41 @@ import { fetchImages } from '../../services/apiPixabay';
 
 export default class ImageGallery extends Component {
   state = {
-    images: null,
+    images: [],
     page: 1,
     loading: false,
     error: null,
+    showLoadMoreBtn: false,
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.searchKey !== this.props.searchKey || prevState.page !== this.state.page) {
-      // this.setState({ loading: true, images: null });
-      this.setState({ loading: true });
+      this.setState({
+        loading: true,
+        images: [],
+        showLoadMoreBtn: false,
+      });
+
       fetchImages(this.props.searchKey, this.state.page)
         .then(data => {
+          if (data.hits.length === 0) {
+            const notify = 'Wrong request';
+            toast.error(notify);
+            this.setState({ showLoadMoreBtn: false });
+            return;
+          }
+
           console.log(data.hits);
-          return data.hits;
+          this.setState({
+            images: this.state.page === 1 ? data.hits : [...prevState.images, ...data.hits],
+            showLoadMoreBtn: true,
+            loading: true,
+          });
+          if (data.hits.length < 12) {
+            this.setState({ showLoadMoreBtn: false });
+          }
+          return;
+          // return data.hits;
         })
-        .then(images => this.setState({ images }))
         .catch(error => this.setState({ error }))
         .finally(() => this.setState({ loading: false }));
     }
@@ -34,7 +56,7 @@ export default class ImageGallery extends Component {
     }));
   };
   render() {
-    const { images, loading } = this.state;
+    const { images, loading, showLoadMoreBtn } = this.state;
     return (
       <>
         {loading && <LoadingDots />}
@@ -51,7 +73,9 @@ export default class ImageGallery extends Component {
             ))}
           </GalleryList>
         )}
-        <Button onClick={this.onLoadMoreClick} />
+        {showLoadMoreBtn && <Button onClick={this.onLoadMoreClick} />}
+
+        {/* <Button onClick={this.onLoadMoreClick} /> */}
       </>
     );
   }

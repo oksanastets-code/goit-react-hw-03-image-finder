@@ -33,9 +33,7 @@ export default class App extends Component {
   }
 
   handleFormSubmit = keyWord => {
-    console.log(keyWord);
     this.setState({ searchWord: keyWord });
-    console.log('searchWord', this.state.searchWord);
   };
   toggleModal = () => {
     this.setState(({ showModal }) => ({
