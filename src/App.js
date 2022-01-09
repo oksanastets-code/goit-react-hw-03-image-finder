@@ -4,28 +4,33 @@ import { Div } from './App.styled';
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 // import ImageGalleryItem from './components/ImageGalleryItem/ImageGalleryItem';
-import Button from './components/Button/Button';
+// import Button from './components/Button/Button';
 import Modal from './components/Modal/Modal';
+// import { fetchImages } from '../services/apiPixabay';
 
 export default class App extends Component {
   state = {
     searchWord: '',
-    page: 1,
+    // page: 1,
     showModal: false,
     modalImage: null,
     modalAlt: null,
-    showLoadMoreBtn: false,
   };
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.page !== this.state.page) {
-
-  //   }
-  // }
-  // componentDidMount(selectedImage, selectedAlt) {
-  //   this.setState({ modalImage: selectedImage, modalAlt: selectedAlt });
-  //     console.log('modalImage', selectedImage)
-  //     this.toggleModal();
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    // if (prevState.page !== this.state.page) {
+    //   ImageGallery.getImages();
+    // }
+    console.log('update');
+  }
+  componentDidMount(selectedImage, selectedAlt) {
+    // this.setState({ modalImage: selectedImage, modalAlt: selectedAlt });
+    //   console.log('modalImage', selectedImage)
+    //   this.toggleModal();
+    console.log('mount');
+  }
+  componentWillUnmount() {
+    console.log('unmount');
+  }
 
   handleFormSubmit = keyWord => {
     console.log(keyWord);
@@ -38,11 +43,11 @@ export default class App extends Component {
     }));
   };
 
-  onLoadMoreClick = () => {
-    this.setState(({ page }) => ({
-      page: page + 1,
-    }));
-  };
+  // onLoadMoreClick = () => {
+  //   this.setState(({ page }) => ({
+  //     page: page + 1,
+  //   }));
+  // };
   onOpenLargeImage = (selectedImage, selectedAlt) => {
     this.setState({ modalImage: selectedImage, modalAlt: selectedAlt });
     console.log('modalImage', selectedImage);
@@ -63,7 +68,7 @@ export default class App extends Component {
           onOpen={this.onOpenLargeImage}
         />
         {/* {showLoadMoreBtn && <Button />} */}
-        <Button onClick={this.onLoadMoreClick} />
+        {/* <Button onClick={this.onLoadMoreClick} /> */}
         {showModal && (
           <Modal onClose={this.toggleModal}>
             <img src={modalImage} alt={modalAlt} />
