@@ -1,8 +1,4 @@
-// import { Component } from 'react';
-// import PropTypes from 'prop-types';
-
-// import { render } from "@testing-library/react";
-
+import PropTypes from 'prop-types';
 import { ButtonLoadMore } from './Button.styled';
 export default function Button({ onClick }) {
   return (
@@ -11,3 +7,6 @@ export default function Button({ onClick }) {
     </ButtonLoadMore>
   );
 }
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};

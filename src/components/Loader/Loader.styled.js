@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-// const dots = keyframes`
-//   50%{
-//         opacity: 0;
-//         transform: scale(0.7) translateY(10px);
-//     }
-// `;
+
 export const DotContainer = styled.div`
   margin-left: auto;
   margin-right: auto;

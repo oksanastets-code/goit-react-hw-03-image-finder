@@ -17,10 +17,15 @@ export default class ImageGallery extends Component {
     showLoadMoreBtn: false,
   };
   componentDidUpdate(prevProps, prevState) {
+    if (prevProps.searchKey !== this.props.searchKey) {
+      this.setState({
+        images: [],
+        page: 1,
+      });
+    }
     if (prevProps.searchKey !== this.props.searchKey || prevState.page !== this.state.page) {
       this.setState({
         loading: true,
-        images: [],
         showLoadMoreBtn: false,
       });
 
@@ -43,7 +48,6 @@ export default class ImageGallery extends Component {
             this.setState({ showLoadMoreBtn: false });
           }
           return;
-          // return data.hits;
         })
         .catch(error => this.setState({ error }))
         .finally(() => this.setState({ loading: false }));
@@ -74,8 +78,6 @@ export default class ImageGallery extends Component {
           </GalleryList>
         )}
         {showLoadMoreBtn && <Button onClick={this.onLoadMoreClick} />}
-
-        {/* <Button onClick={this.onLoadMoreClick} /> */}
       </>
     );
   }

@@ -28,7 +28,6 @@ export default class Searchbar extends Component {
   };
   handleKeyWordChange = e => {
     this.setState({ keyWord: e.currentTarget.value.toLowerCase() });
-    // console.log(this.state.keyWord);
   };
 
   render() {
