@@ -32,7 +32,7 @@ export default class ImageGallery extends Component {
       fetchImages(this.props.searchKey, this.state.page)
         .then(data => {
           if (data.hits.length === 0) {
-            const notify = 'Wrong request';
+            const notify = 'Wrong request - nothing found. Please, try again.';
             toast.error(notify);
             this.setState({ showLoadMoreBtn: false });
             return;
@@ -59,6 +59,7 @@ export default class ImageGallery extends Component {
       page: prevState.page + 1,
     }));
   };
+
   render() {
     const { images, loading, showLoadMoreBtn } = this.state;
     return (
