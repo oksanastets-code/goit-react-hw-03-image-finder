@@ -24,7 +24,6 @@ export default class App extends Component {
 
   onOpenLargeImage = (selectedImage, selectedAlt) => {
     this.setState({ modalImage: selectedImage, modalAlt: selectedAlt });
-    console.log('modalImage', selectedImage);
     this.toggleModal();
   };
 
