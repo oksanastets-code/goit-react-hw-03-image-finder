@@ -25,7 +25,7 @@ export default class ImageGallery extends Component {
     }
     if (prevProps.searchKey !== this.props.searchKey || prevState.page !== this.state.page) {
       this.setState({
-        loading: true,
+        loading: this.state.page === 1 ? true : false,
         showLoadMoreBtn: false,
       });
 
@@ -42,7 +42,6 @@ export default class ImageGallery extends Component {
           this.setState({
             images: this.state.page === 1 ? data.hits : [...prevState.images, ...data.hits],
             showLoadMoreBtn: true,
-            loading: true,
           });
           if (data.hits.length < 12) {
             this.setState({ showLoadMoreBtn: false });
